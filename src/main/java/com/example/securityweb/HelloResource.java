@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.securityweb.models.AuthenticationRequest;
 import com.example.securityweb.models.AuthenticationResponse;
+import com.example.securityweb.models.HelloResponse;
 import com.example.securityweb.util.JwtUtil;
 
 @RestController
@@ -29,8 +30,8 @@ public class HelloResource {
 	private JwtUtil jwtUtil;
 
 	@RequestMapping("/hello")
-	public String hello() {
-		return "Hello World";
+	public HelloResponse hello() {
+		return new HelloResponse("Hello World!", "Shubham");
 	}
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
