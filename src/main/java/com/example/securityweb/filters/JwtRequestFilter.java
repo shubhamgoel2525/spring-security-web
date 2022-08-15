@@ -21,11 +21,13 @@ import com.example.securityweb.util.JwtUtil;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-	@Autowired
 	private UserDetailsService userDetailsService;
-
-	@Autowired
 	private JwtUtil jwtUtil;
+
+	public JwtRequestFilter(UserDetailsService userDetailsService, JwtUtil jwtUtil) {
+		this.userDetailsService = userDetailsService;
+		this.jwtUtil = jwtUtil;
+	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -54,7 +56,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 			}
 		}
-		
+
 		// continue to next filter
 		// If any of the above cases fail, even then the chain will continue
 		filterChain.doFilter(request, response);
