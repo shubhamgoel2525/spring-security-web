@@ -26,8 +26,8 @@ public class SecurityConfiguration {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests().antMatchers("/authenticate").permitAll();
-		http.authorizeRequests().anyRequest().authenticated();
+		http.authorizeHttpRequests().requestMatchers("/authenticate").permitAll();
+		http.authorizeHttpRequests().anyRequest().authenticated();
 
 		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
